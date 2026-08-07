@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'recettesListe.dart';
+import 'profilPage.dart';
 
 class Bottombarmenu extends StatelessWidget {
   const Bottombarmenu({super.key});
@@ -17,6 +18,10 @@ class Bottombarmenu extends StatelessWidget {
               MaterialPageRoute(builder: (context) => const RecettesListe()),
               (route) => false,
             );
+          } else if (index == 1) {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const ProfilPage()),
+            );
           }
         },
         items: [
@@ -25,8 +30,8 @@ class Bottombarmenu extends StatelessWidget {
               label: 'Accueil'
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.camera),
-              label: 'Photos'
+              icon: Icon(Icons.person),
+              label: 'Profil'
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.message),
