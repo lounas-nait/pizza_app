@@ -22,7 +22,8 @@ class _RecettesListeState extends State<RecettesListe> {
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCxv_7UxuKCHrglOBjwxbOqTyMqf7v2t7r_w&usqp=CAU",
       "Super ils ont envie de faire dodo !",
       false,
-      10
+      10,
+      17.99
   ),
   Recette(
       2,
@@ -31,7 +32,8 @@ class _RecettesListeState extends State<RecettesListe> {
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCxv_7UxuKCHrglOBjwxbOqTyMqf7v2t7r_w&usqp=CAU",
       "Super ils ont envie de faire dodo !",
       false,
-      10
+      10,
+      15.99
   ),
   Recette(
       3,
@@ -40,7 +42,8 @@ class _RecettesListeState extends State<RecettesListe> {
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCxv_7UxuKCHrglOBjwxbOqTyMqf7v2t7r_w&usqp=CAU",
       "Super ils ont envie de faire dodo !",
       false,
-      10
+      10,
+      25.99
   ),
   Recette(
       4,
@@ -49,7 +52,8 @@ class _RecettesListeState extends State<RecettesListe> {
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCxv_7UxuKCHrglOBjwxbOqTyMqf7v2t7r_w&usqp=CAU",
       "Super ils ont envie de faire dodo !",
       false,
-      10
+      10,
+      13.99
   ),
 ];
 
@@ -151,6 +155,16 @@ class RecetteItemWidget extends StatelessWidget{
                     ),
                   ),
                 ),
+                Container(
+  padding: EdgeInsets.only(left: 15, top: 4),
+  child: Text(
+    '${recette.price.toStringAsFixed(2)} €',
+    style: TextStyle(
+        color: Colors.red,
+        fontWeight: FontWeight.bold
+    ),
+  ),
+),
               ],
             )
           ],

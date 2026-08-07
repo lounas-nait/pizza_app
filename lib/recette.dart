@@ -6,6 +6,7 @@ class Recette{
   String description;
   bool isFavorite;
   int favoriteCount;
+  double price;
 
-  Recette(this.id, this.title, this.user, this.imageUrl, this.description, this.isFavorite, this.favoriteCount);
+  Recette(this.id, this.title, this.user, this.imageUrl, this.description, this.isFavorite, this.favoriteCount, this.price);
 }

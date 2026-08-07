@@ -63,6 +63,17 @@ class Pizzadetails extends StatelessWidget {
                     ],
                   )
               ),
+              Container(
+  padding: const EdgeInsets.only(left: 15, top: 4),
+  child: Text(
+    '${recette.price.toStringAsFixed(2)} €',
+    style: TextStyle(
+        color: Colors.red,
+        fontSize: 18,
+        fontWeight: FontWeight.bold
+    ),
+  ),
+),
               FavorisWidget(isFavorited: recette.isFavorite, favorisCount: recette.favoriteCount),
             ],
           ),
