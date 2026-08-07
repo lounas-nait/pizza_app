@@ -16,6 +16,12 @@ class Pizzadetails extends StatefulWidget {
 class _PizzadetailsState extends State<Pizzadetails> {
   double _quantite = 1;
 
+  final List<Map<String, String>> _commentaires = [
+    {'auteur': 'Lounas N.', 'texte': 'Délicieuse, on s\'y ressert deux fois !'},
+    {'auteur': 'Karim B.', 'texte': 'La pâte est parfaitement croustillante.'},
+    {'auteur': 'Meg M.', 'texte': 'Un peu trop salée à mon goût mais très bonne.'},
+  ];
+
   @override
   Widget build(BuildContext context) {
     final recette = widget.recette;
@@ -163,7 +169,45 @@ class _PizzadetailsState extends State<Pizzadetails> {
               _liste('Sel'),
               _liste('Fromage')
             ],
-          )
+          ),
+          const Divider(height: 30, thickness: 1),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Text(
+              'Commentaires',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          const SizedBox(height: 8),
+          ..._commentaires.map((commentaire) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 6),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CircleAvatar(
+                    radius: 16,
+                    backgroundColor: Colors.red.shade100,
+                    child: Icon(Icons.person, size: 18, color: Colors.red),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          commentaire['auteur']!,
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                        ),
+                        Text(commentaire['texte']!),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+          const SizedBox(height: 20),
         ],
       ),
     );
