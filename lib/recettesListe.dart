@@ -15,53 +15,101 @@ class RecettesListe extends StatefulWidget {
 class _RecettesListeState extends State<RecettesListe> {
 
   final List<Recette> recettes = [
-  Recette(
-      1,
-      "Pizza maison",
-      "Par Michel dupont",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCxv_7UxuKCHrglOBjwxbOqTyMqf7v2t7r_w&usqp=CAU",
-      "Super ils ont envie de faire dodo !",
-      false,
-      10,
-      17.99
-  ),
-  Recette(
-      2,
-      "Pizza papa",
-      "Par Michel dudu",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCxv_7UxuKCHrglOBjwxbOqTyMqf7v2t7r_w&usqp=CAU",
-      "Super ils ont envie de faire dodo !",
-      false,
-      10,
-      15.99
-  ),
-  Recette(
-      3,
-      "Pizza maman",
-      "Par Michel dudu",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCxv_7UxuKCHrglOBjwxbOqTyMqf7v2t7r_w&usqp=CAU",
-      "Super ils ont envie de faire dodo !",
-      false,
-      10,
-      25.99
-  ),
-  Recette(
-      4,
-      "Pizza frérot",
-      "Par Michel dudu",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCxv_7UxuKCHrglOBjwxbOqTyMqf7v2t7r_w&usqp=CAU",
-      "Super ils ont envie de faire dodo !",
-      false,
-      10,
-      13.99
-  ),
-];
+    Recette(1, "Pizza maison", "Par Michel dupont", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCxv_7UxuKCHrglOBjwxbOqTyMqf7v2t7r_w&usqp=CAU", "Super ils ont envie de faire dodo !", false, 10, 17.99),
+    Recette(2, "Pizza papa", "Par Michel dudu", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCxv_7UxuKCHrglOBjwxbOqTyMqf7v2t7r_w&usqp=CAU", "Super ils ont envie de faire dodo !", false, 10, 15.99),
+    Recette(3, "Pizza maman", "Par Michel dudu", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCxv_7UxuKCHrglOBjwxbOqTyMqf7v2t7r_w&usqp=CAU", "Super ils ont envie de faire dodo !", false, 10, 25.99),
+    Recette(4, "Pizza frérot", "Par Michel dudu", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCxv_7UxuKCHrglOBjwxbOqTyMqf7v2t7r_w&usqp=CAU", "Super ils ont envie de faire dodo !", false, 10, 13.99),
+  ];
+
+  final TextEditingController _titreController = TextEditingController();
+  final TextEditingController _auteurController = TextEditingController();
+  final TextEditingController _prixController = TextEditingController();
+  final TextEditingController _imageController = TextEditingController();
+
+  void _ouvrirFormulaireAjout() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Ajouter une pizza'),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: _titreController,
+                  decoration: InputDecoration(labelText: 'Nom de la pizza'),
+                ),
+                TextField(
+                  controller: _auteurController,
+                  decoration: InputDecoration(labelText: 'Auteur (ex: Par Michel)'),
+                ),
+                TextField(
+                  controller: _prixController,
+                  decoration: InputDecoration(labelText: 'Prix (ex: 12.50)'),
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                ),
+                TextField(
+                  controller: _imageController,
+                  decoration: InputDecoration(labelText: 'URL de l\'image'),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Annuler'),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+              onPressed: () {
+                if (_titreController.text.isEmpty || _imageController.text.isEmpty) {
+                  return;
+                }
+                final nouvelId = recettes.isEmpty
+                    ? 1
+                    : recettes.map((r) => r.id).reduce((a, b) => a > b ? a : b) + 1;
+                setState(() {
+                  recettes.add(
+                    Recette(
+                      nouvelId,
+                      _titreController.text,
+                      _auteurController.text.isEmpty ? 'Par un ami' : _auteurController.text,
+                      _imageController.text,
+                      'Une nouvelle recette délicieuse !',
+                      false,
+                      0,
+                      double.tryParse(_prixController.text) ?? 0.0,
+                    ),
+                  );
+                });
+                _titreController.clear();
+                _auteurController.clear();
+                _prixController.clear();
+                _imageController.clear();
+                Navigator.of(context).pop();
+              },
+              child: Text('Ajouter', style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarTitre(title: 'Liste des pizzas'),
       bottomNavigationBar: Bottombarmenu(),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.red,
+        onPressed: _ouvrirFormulaireAjout,
+        child: Icon(Icons.add, color: Colors.white),
+      ),
       body: ListView.builder(
           itemCount: recettes.length,
           itemBuilder: (context, index){
@@ -86,10 +134,6 @@ class _RecettesListeState extends State<RecettesListe> {
               background: Container(color: Colors.red,),
                 child: RecetteItemWidget(recette: recette),
             );
-            
-            //return Container(
-            //  child: RecetteItemWidget(recette: recette),
-            //);
           }
       ),
     );
@@ -104,10 +148,7 @@ class RecetteItemWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      //permet de détecter les intéractions tactiles sur n'importe quel enfant widget
       onTap: (){
-        //Navigator.push(context, MaterialPageRoute(builder: (context) => Pizzadetails(recette: recette)));
-
          Navigator.push(context,
           PageRouteBuilder(
               pageBuilder: (context, animation, secondary) => Pizzadetails(recette: recette),
@@ -115,15 +156,11 @@ class RecetteItemWidget extends StatelessWidget{
                 var begin= Offset(0.0, 0.3);
                 var end= Offset.zero;
                 var twin = Tween(begin: begin, end: end);
-               // return SlideTransition(position: animation.drive(twin), child: child,);
                animation = CurvedAnimation(parent: animation, curve: Curves.ease);
                return FadeTransition(opacity: animation, child: child);
-
               }
-
           ),
         );
-
       },
       child: Card(
         margin: EdgeInsets.all(8),
@@ -156,15 +193,15 @@ class RecetteItemWidget extends StatelessWidget{
                   ),
                 ),
                 Container(
-  padding: EdgeInsets.only(left: 15, top: 4),
-  child: Text(
-    '${recette.price.toStringAsFixed(2)} €',
-    style: TextStyle(
-        color: Colors.red,
-        fontWeight: FontWeight.bold
-    ),
-  ),
-),
+                  padding: EdgeInsets.only(left: 15, top: 4),
+                  child: Text(
+                    '${recette.price.toStringAsFixed(2)} €',
+                    style: TextStyle(
+                        color: Colors.red,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
               ],
             )
           ],
