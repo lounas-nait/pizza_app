@@ -25,10 +25,15 @@ class AppBarTitre extends StatelessWidget implements PreferredSizeWidget{
           fontSize: 30,
         ),
       ),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.search, color: Colors.white),
+          onPressed: () {},
+        ),
+      ],
     );
   }
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
-
