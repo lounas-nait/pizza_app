@@ -17,9 +17,9 @@ class _PizzadetailsState extends State<Pizzadetails> {
   double _quantite = 1;
 
   final List<Map<String, String>> _commentaires = [
-    {'auteur': 'Lounas N.', 'texte': 'Délicieuse, on s\'y ressert deux fois !'},
-    {'auteur': 'Karim B.', 'texte': 'La pâte est parfaitement croustillante.'},
-    {'auteur': 'Meg M.', 'texte': 'Un peu trop salée à mon goût mais très bonne.'},
+    {'auteur': 'Loona.', 'texte': 'Délicieuse, on s\'y ressert deux fois !'},
+    {'auteur': 'Stan.', 'texte': 'La pâte est parfaitement croustillante.'},
+    {'auteur': 'Fionna.', 'texte': 'Un peu trop salée à mon goût mais très bonne.'},
   ];
 
   @override
