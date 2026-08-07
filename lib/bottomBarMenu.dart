@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'recettesListe.dart';
 
 class Bottombarmenu extends StatelessWidget {
   const Bottombarmenu({super.key});
@@ -10,6 +11,14 @@ class Bottombarmenu extends StatelessWidget {
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.white,
         type: BottomNavigationBarType.fixed,
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => const RecettesListe()),
+              (route) => false,
+            );
+          }
+        },
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.home),

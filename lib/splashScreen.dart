@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             SizedBox(height: 20),
             Text(
-              'Bonjour, Bienvenue sur Pi PIZZA',
+              'Go Pizza 🍕',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 30,
