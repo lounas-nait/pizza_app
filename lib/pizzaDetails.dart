@@ -22,6 +22,52 @@ class _PizzadetailsState extends State<Pizzadetails> {
     {'auteur': 'Fionna.', 'texte': 'Un peu trop salée à mon goût mais très bonne.'},
   ];
 
+  final TextEditingController _commentaireController = TextEditingController();
+
+  void _ouvrirFormulaireCommentaire() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Ajouter un commentaire'),
+          content: TextField(
+            controller: _commentaireController,
+            maxLines: 3,
+            decoration: InputDecoration(
+              hintText: 'Votre avis sur cette pizza...',
+              border: OutlineInputBorder(),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Annuler'),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+              onPressed: () {
+                if (_commentaireController.text.isEmpty) {
+                  return;
+                }
+                setState(() {
+                  _commentaires.add({
+                    'auteur': 'Moi',
+                    'texte': _commentaireController.text,
+                  });
+                });
+                _commentaireController.clear();
+                Navigator.of(context).pop();
+              },
+              child: Text('Publier', style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final recette = widget.recette;
@@ -121,22 +167,25 @@ class _PizzadetailsState extends State<Pizzadetails> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(bottom: 4),
-                      child: Icon(
-                          Icons.comment,
-                          color: Colors.black
+                GestureDetector(
+                  onTap: _ouvrirFormulaireCommentaire,
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(bottom: 4),
+                        child: Icon(
+                            Icons.comment,
+                            color: Colors.black
+                        ),
                       ),
-                    ),
-                    Text('Commenter', style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400
-                    ),
-                    )
-                  ],
+                      Text('Commenter', style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400
+                      ),
+                      )
+                    ],
+                  ),
                 ),
                 Column(
                   children: [
