@@ -15,39 +15,43 @@ class RecettesListe extends StatefulWidget {
 class _RecettesListeState extends State<RecettesListe> {
 
   final List<Recette> recettes = [
-    Recette(
-        "Pizza maison",
-        "Par Michel dupont",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCxv_7UxuKCHrglOBjwxbOqTyMqf7v2t7r_w&usqp=CAU",
-        "Super ils ont envie de faire dodo !",
-        false,
-        10
-    ),
-    Recette(
-        "Pizza papa",
-        "Par Michel dudu",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCxv_7UxuKCHrglOBjwxbOqTyMqf7v2t7r_w&usqp=CAU",
-        "Super ils ont envie de faire dodo !",
-        false,
-        10
-    ),
-    Recette(
-        "Pizza maman",
-        "Par Michel dudu",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCxv_7UxuKCHrglOBjwxbOqTyMqf7v2t7r_w&usqp=CAU",
-        "Super ils ont envie de faire dodo !",
-        false,
-        10
-    ),
-    Recette(
-        "Pizza frérot",
-        "Par Michel dudu",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCxv_7UxuKCHrglOBjwxbOqTyMqf7v2t7r_w&usqp=CAU",
-        "Super ils ont envie de faire dodo !",
-        false,
-        10
-    ),
-  ];
+  Recette(
+      1,
+      "Pizza maison",
+      "Par Michel dupont",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCxv_7UxuKCHrglOBjwxbOqTyMqf7v2t7r_w&usqp=CAU",
+      "Super ils ont envie de faire dodo !",
+      false,
+      10
+  ),
+  Recette(
+      2,
+      "Pizza papa",
+      "Par Michel dudu",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCxv_7UxuKCHrglOBjwxbOqTyMqf7v2t7r_w&usqp=CAU",
+      "Super ils ont envie de faire dodo !",
+      false,
+      10
+  ),
+  Recette(
+      3,
+      "Pizza maman",
+      "Par Michel dudu",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCxv_7UxuKCHrglOBjwxbOqTyMqf7v2t7r_w&usqp=CAU",
+      "Super ils ont envie de faire dodo !",
+      false,
+      10
+  ),
+  Recette(
+      4,
+      "Pizza frérot",
+      "Par Michel dudu",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCxv_7UxuKCHrglOBjwxbOqTyMqf7v2t7r_w&usqp=CAU",
+      "Super ils ont envie de faire dodo !",
+      false,
+      10
+  ),
+];
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +64,7 @@ class _RecettesListeState extends State<RecettesListe> {
             final recette = recettes[index];
               
             return Dismissible(
-                key: Key(recette.title),
+                key: Key(recette.id.toString()),
                 onDismissed: (direction){
                   setState(() {
                     recettes.removeAt(index);
