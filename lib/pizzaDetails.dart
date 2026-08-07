@@ -5,12 +5,20 @@ import 'bottomBarMenu.dart';
 import 'package:archi_pizza/favorisWidget.dart';
 import 'recette.dart';
 
-class Pizzadetails extends StatelessWidget {
+class Pizzadetails extends StatefulWidget {
   const Pizzadetails({super.key, required this.recette});
   final Recette recette;
 
   @override
+  State<Pizzadetails> createState() => _PizzadetailsState();
+}
+
+class _PizzadetailsState extends State<Pizzadetails> {
+  double _quantite = 1;
+
+  @override
   Widget build(BuildContext context) {
+    final recette = widget.recette;
 
     Widget _liste(String texte){
       return Padding(
@@ -64,18 +72,43 @@ class Pizzadetails extends StatelessWidget {
                   )
               ),
               Container(
-  padding: const EdgeInsets.only(left: 15, top: 4),
-  child: Text(
-    '${recette.price.toStringAsFixed(2)} €',
-    style: TextStyle(
-        color: Colors.red,
-        fontSize: 18,
-        fontWeight: FontWeight.bold
-    ),
-  ),
-),
+                padding: const EdgeInsets.only(left: 15, top: 4),
+                child: Text(
+                  '${recette.price.toStringAsFixed(2)} €',
+                  style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
+              ),
               FavorisWidget(isFavorited: recette.isFavorite, favorisCount: recette.favoriteCount),
             ],
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Quantité : ${_quantite.toInt()}',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                ),
+                Slider(
+                  value: _quantite,
+                  min: 1,
+                  max: 10,
+                  divisions: 9,
+                  activeColor: Colors.red,
+                  label: _quantite.toInt().toString(),
+                  onChanged: (value) {
+                    setState(() {
+                      _quantite = value;
+                    });
+                  },
+                ),
+              ],
+            ),
           ),
           Container(
             padding: EdgeInsets.all(15),
