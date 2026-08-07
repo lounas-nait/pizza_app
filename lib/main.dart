@@ -1,5 +1,6 @@
 import 'package:archi_pizza/recettesListe.dart';
 import 'package:flutter/material.dart';
+import 'package:archi_pizza/splashScreen.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         useMaterial3: true,
       ),
-      home: RecettesListe()
+      home: const SplashScreen()
     );
   }
 
